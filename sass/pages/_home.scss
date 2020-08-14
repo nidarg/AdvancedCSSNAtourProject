@@ -1,0 +1,40 @@
+.section-about{
+	background-color:$color-grey-light-1;
+	padding:25rem 0;
+	/* because of header polygon form between section and header remains white background
+	 so to fill that space with section color background calculate difference between 
+	header height and bottom right corner of header -> 20vh => which means that margin-top of 
+	section must go up with 20vh =>margin-top:-20vh;  */
+	margin-top:-20vh; 
+}
+
+.section-features{
+	background-image: 
+	linear-gradient(
+		to right bottom,rgba($color-primary-light, 0.6),rgba($color-primary-dark, 0.6))
+		 ,url(../img/nat-4.jpg);
+	background-size: cover;
+	display:flex;
+	align-items: center;
+	justify-content: space-evenly;
+	//clip-path: polygon(0 10vh, 100% 0, 100% 70vh, 0 100%);
+	transform:skewY(-7deg);
+	margin-top:-7rem;
+
+	// all direct children(row)	
+	& > * {
+		transform:skewY(7deg);
+	}
+}
+
+.section-tour{
+	background-color:$color-grey-light-1;
+	padding:25rem 0 15rem 0;
+	margin-top:-11rem;
+}
+
+.section-stories{
+	position: relative;
+	padding:25rem 0 15rem 0;
+	
+}

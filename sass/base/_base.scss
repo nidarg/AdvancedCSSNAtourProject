@@ -1,0 +1,16 @@
+
+*,
+*::before,
+*::after{
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+html{
+    font-size: 62.5%; /*is actualy 62.5% from default font size(16px) which result to 10 px*/
+}
+
+body{
+	box-sizing:border-box;
+}

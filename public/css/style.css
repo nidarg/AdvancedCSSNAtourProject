@@ -1,0 +1,689 @@
+/*
+COLORS:
+
+Light green: #7ed56f
+Medium green: #55c57a
+Dark green: #28b485
+
+box-sizing: border-box -> no extra margin or padding for element
+vh -> viewport height
+to split text header use display:block -> it takes the entire width
+
+!!! relative units
+percentage - for fonts the reference is the parent element
+            - for length(padding..) the reference is parentWIDTH
+em         -for fonts the reference is the PARENT FONT SIZE element
+            -for length the reference is the FONT SIZE of CURRENT element
+
+rem        - for both -font size and length the reference is the FONT SIZE of ROOT  element
+
+
+*/
+/* apply 7 to 1 architecture model-> all the scss files merged into main scss file 
+ files with _ are partials and we import to main.scss*/
+/* COLORS*/
+/* FONT SIZES */
+/* GRID */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit; }
+
+html {
+  font-size: 62.5%;
+  /*is actualy 62.5% from default font size(16px) which result to 10 px*/ }
+
+body {
+  box-sizing: border-box; }
+
+@keyframes moveFromLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-10rem); }
+  80% {
+    transform: translate(2rem); }
+  100% {
+    opacity: 1;
+    transform: translate(0); } }
+
+@keyframes moveFromRight {
+  0% {
+    opacity: 0;
+    transform: translateX(10rem); }
+  80% {
+    transform: translate(-2rem); }
+  100% {
+    opacity: 1;
+    transform: translate(0); } }
+
+@keyframes moveFromBottom {
+  0% {
+    opacity: 0;
+    transform: translateY(3rem); }
+  100% {
+    opacity: 1;
+    transform: translate(0); } }
+
+.u-center-text {
+  text-align: center; }
+
+.u-margin-bottom-big {
+  margin-bottom: 8rem; }
+
+.u-margin-bottom-medium {
+  margin-bottom: 4rem; }
+
+.u-margin-bottom-small {
+  margin-bottom: 1.5rem; }
+
+.u-margin-top-big {
+  margin-top: 8rem; }
+
+body {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  /*font-size: 16px;*/
+  line-height: 1.7;
+  color: #777;
+  padding: 3rem; }
+
+.heading-primary {
+  color: #fff;
+  text-transform: uppercase;
+  backface-visibility: hidden;
+  margin-bottom: 5rem; }
+  .heading-primary--main {
+    display: block;
+    font-size: 6rem;
+    letter-spacing: 3.5rem;
+    animation-name: moveFromLeft;
+    animation-duration: 1.3s;
+    animation-timing-function: ease-out; }
+  .heading-primary--sub {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 1.75rem;
+    animation: moveFromRight 1.3s ease-out; }
+
+.heading-secondary {
+  font-size: 3.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  display: inline-block;
+  background-image: linear-gradient(to right, #7ed56f, #28b485);
+  /* to make the text gradient use clip the place where text appears
+	 and then make the text transparent  */
+  -webkit-background-clip: text;
+  color: transparent;
+  letter-spacing: .2rem;
+  transition: all .5s; }
+  .heading-secondary:hover {
+    transform: skewY(5deg) skewX(15deg) scale(1.1);
+    text-shadow: 0.5rem 1rem 2rem rgba(0, 0, 0, 0.6); }
+
+.heading-tertiary {
+  font-size: 1.6rem;
+  font-weight: 700;
+  text-transform: uppercase; }
+
+.paragraph {
+  font-size: 1.6rem; }
+  .paragraph:not(:last-child) {
+    margin-bottom: 3rem; }
+
+.btn {
+  /* pseudo element -> a virtual element put after element */ }
+  .btn:link, .btn:visited {
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 1.5rem 4rem;
+    display: inline-block;
+    border-radius: 10rem;
+    transition: all .75s;
+    position: relative;
+    font-size: 1.6rem; }
+  .btn:hover {
+    transform: translateY(-0.3rem);
+    box-shadow: 0 1.5rem 1.5rem rgba(0, 0, 0, 0.35); }
+    .btn:hover::after {
+      transform: scaleX(1.4) scaleY(1.6);
+      opacity: 0; }
+  .btn:active {
+    transform: translateY(-0.1rem);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.25); }
+  .btn--white {
+    background-color: #fff;
+    color: #777; }
+    .btn--white::after {
+      background-color: #fff; }
+  .btn--green {
+    background-color: #55c57a;
+    color: #fff; }
+    .btn--green::after {
+      background-color: #55c57a; }
+  .btn::after {
+    content: "";
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    border-radius: 10rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transition: all .75s; }
+  .btn--animated {
+    animation: moveFromBottom .5s ease-out 1.4s;
+    animation-fill-mode: backwards;
+    /* first apply animation */ }
+
+.btn-text:link, .btn-text:visited {
+  font-size: 1.6rem;
+  color: #55c57a;
+  display: inline-block;
+  text-decoration: none;
+  border-bottom: 1px solid #55c57a;
+  padding: 3px;
+  transition: all .2s;
+  margin: 5rem auto; }
+
+.btn-text:hover {
+  background-color: #55c57a;
+  color: #fff;
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.25);
+  transform: translateY(-0.3rem); }
+
+.btn-text:active {
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.25);
+  transform: translateY(-0.1rem); }
+
+.composition {
+  position: relative; }
+  .composition_photo {
+    width: 55%;
+    box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.4);
+    border-radius: 3px;
+    position: absolute;
+    z-index: 10;
+    transition: all 0.7s cubic-bezier(0.17, 0.67, 0.83, 0.67); }
+    .composition_photo--p1 {
+      left: 0;
+      top: -2rem; }
+    .composition_photo--p2 {
+      right: 3%;
+      top: 2rem; }
+    .composition_photo--p3 {
+      left: 20%;
+      top: 12rem; }
+    .composition_photo:hover {
+      transform: scale(1.1);
+      box-shadow: 0 2.5rem 4rem rgba(0, 0, 0, 0.6);
+      z-index: 20; }
+  .composition:hover .composition_photo:not(:hover) {
+    transform: scale(0.9); }
+
+.feature-box {
+  background-color: rgba(255, 255, 255, 0.8);
+  font-size: 1.5rem;
+  padding: 2.5rem;
+  text-align: center;
+  border-radius: 3px;
+  box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.15);
+  transition: all .7s; }
+  .feature-box_icon {
+    font-size: 6rem;
+    margin-bottom: .5rem;
+    display: inline-block;
+    background-image: linear-gradient(to right, #7ed56f, #28b485);
+    /* to make the text gradient use clip the place where text appears
+	 and then make the text transparent  */
+    -webkit-background-clip: text;
+    color: transparent; }
+  .feature-box:hover {
+    transform: translateY(-1.5rem); }
+
+.card {
+  perspective: 150rem;
+  -moz-perspective: 150rem;
+  position: relative;
+  height: 50rem; }
+  .card_side {
+    height: 50rem;
+    transition: all 2s ease;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    backface-visibility: hidden;
+    border-radius: 3px;
+    overflow: hidden;
+    box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.2); }
+    .card_side-front {
+      background-color: #fff; }
+    .card_side-back {
+      transform: rotateY(-180deg); }
+      .card_side-back-1 {
+        background-image: linear-gradient(to right bottom, #ffb900, #ff7730); }
+      .card_side-back-2 {
+        background-image: linear-gradient(to right bottom, #7ed56f, #28b485); }
+      .card_side-back-3 {
+        background-image: linear-gradient(to right bottom, #2998ff, #5643fa); }
+  .card:hover .card_side-front {
+    transform: rotateY(180deg); }
+  .card:hover .card_side-back {
+    transform: rotateY(0); }
+  .card_picture {
+    background-size: cover;
+    height: 23rem;
+    background-blend-mode: color;
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%); }
+    .card_picture-1 {
+      background-image: linear-gradient(to right bottom, #ffb900, #ff7730), url(../img/nat-5.jpg); }
+    .card_picture-2 {
+      background-image: linear-gradient(to right bottom, #7ed56f, #28b485), url(../img/nat-6.jpg); }
+    .card_picture-3 {
+      background-image: linear-gradient(to right bottom, #2998ff, #5643fa), url(../img/nat-7.jpg); }
+  .card_heading {
+    font-size: 2.2rem;
+    font-weight: 300;
+    color: #fff;
+    text-transform: uppercase;
+    position: absolute;
+    top: 12rem;
+    right: 2rem;
+    text-align: right;
+    width: 75%; }
+  .card_heading_span {
+    padding: 1rem 1.5rem; }
+    .card_heading_span-1 {
+      background-image: linear-gradient(to right bottom, rgba(255, 185, 0, 0.8), rgba(255, 119, 48, 0.8)); }
+    .card_heading_span-2 {
+      background-image: linear-gradient(to right bottom, rgba(126, 213, 111, 0.8), rgba(40, 180, 133, 0.8)); }
+    .card_heading_span-3 {
+      background-image: linear-gradient(to right bottom, rgba(41, 152, 255, 0.8), rgba(86, 67, 250, 0.8)); }
+  .card_details {
+    padding: 3rem; }
+    .card_details ul {
+      list-style: none;
+      width: 80%;
+      margin: 0 auto; }
+      .card_details ul li {
+        text-align: center;
+        font-size: 1.5rem;
+        padding: 1rem; }
+        .card_details ul li:not(:last-child) {
+          border-bottom: 1px solid #eee; }
+  .card_back-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    text-align: center; }
+  .card_price-box {
+    text-align: center;
+    color: #fff;
+    margin-bottom: 8rem; }
+  .card_price-only {
+    font-size: 1.4rem;
+    text-transform: uppercase; }
+  .card_price-value {
+    font-size: 6rem;
+    font-weight: 100; }
+
+.story {
+  width: 75%;
+  margin: 10rem auto;
+  background-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 3rem 6rem rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+  padding: 6rem;
+  padding-left: 9rem;
+  font-size: 1.6rem;
+  transform: skewX(-15deg); }
+  .story_shape {
+    width: 15rem;
+    height: 15rem;
+    float: left;
+    -webkit-shape-outside: circle(50% at 50% 50%);
+    shape-outside: circle(50% at 50% 50%);
+    -webkit-clip-path: circle(50% at 50% 50%);
+    clip-path: circle(50% at 50% 50%);
+    transform: translateX(-3rem) skewX(12deg);
+    position: relative; }
+  .story_image {
+    height: 100%;
+    transform: translateX(-4rem) scale(1.4);
+    backface-visibility: hidden;
+    transition: all .5s; }
+  .story_text {
+    transform: skewX(12deg); }
+  .story_caption {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 20%);
+    text-transform: uppercase;
+    font-size: 1.7rem;
+    text-align: center;
+    color: #fff;
+    opacity: 0;
+    transition: all .5s;
+    backface-visibility: hidden; }
+  .story:hover .story_caption {
+    opacity: 1;
+    transform: translate(-50%, -50%); }
+  .story:hover .story_image {
+    transform: translateX(-4rem) scale(1);
+    filter: blur(2px) brightness(85%); }
+
+.bg-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+  opacity: .18;
+  overflow: hidden; }
+  .bg-video_content {
+    height: 100%;
+    width: 100%;
+    object-fit: cover; }
+
+.header {
+  height: 95vh;
+  background-image: linear-gradient(to right bottom, rgba(126, 213, 111, 0.8), rgba(40, 180, 133, 0.8)), url(../img/hero.jpg);
+  background-size: cover;
+  background-position: top;
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+  /* https://bennettfeely.com */
+  position: relative; }
+  .header__logo-box {
+    position: absolute;
+    top: 4rem;
+    left: 4rem; }
+  .header__logo {
+    height: 3.5rem; }
+  .header__text-box {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center; }
+
+.row {
+  max-width: 150rem;
+  margin: 20% auto;
+  height: 100%;
+  /*&:not(:last-child){
+		margin-bottom:$gutter-vertical;
+	}*/
+  /* calc( 2* (100% - 2* 6rem)/3 + 6rem); */ }
+  .row:after {
+    content: "";
+    float: both;
+    display: table; }
+  .row [class^="col-"] {
+    margin-bottom: 5rem;
+    float: left; }
+    .row [class^="col-"]:not(:last-child) {
+      margin-right: 6rem; }
+  .row .col-1-of-2 {
+    width: calc((100% - 6rem) /2); }
+  .row .col-1-of-3 {
+    width: calc((100% - 2* 6rem)/3); }
+  .row .col-2-of-3 {
+    width: calc( 2* (100% - 2* 6rem)/3 + 6rem); }
+  .row .col-1-of-4 {
+    width: calc((100% - 3 * 6rem) /4); }
+  .row .col-2-of-4 {
+    width: calc(2* (100% - 3* 6rem)/4 + 6rem); }
+  .row .col-3-of-4 {
+    width: calc(3 * (100% - 3* 6rem)/4 + 2 * 6rem); }
+
+.section-about {
+  background-color: #f7f7f7;
+  padding: 25rem 0;
+  /* because of header polygon form between section and header remains white background
+	 so to fill that space with section color background calculate difference between 
+	header height and bottom right corner of header -> 20vh => which means that margin-top of 
+	section must go up with 20vh =>margin-top:-20vh;  */
+  margin-top: -20vh; }
+
+.section-features {
+  background-image: linear-gradient(to right bottom, rgba(126, 213, 111, 0.6), rgba(40, 180, 133, 0.6)), url(../img/nat-4.jpg);
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  transform: skewY(-7deg);
+  margin-top: -7rem; }
+  .section-features > * {
+    transform: skewY(7deg); }
+
+.section-tour {
+  background-color: #f7f7f7;
+  padding: 25rem 0 15rem 0;
+  margin-top: -11rem; }
+
+.section-stories {
+  position: relative;
+  padding: 25rem 0 15rem 0; }
+
+/* !! "abstracts/variables"
+
+					$color-primary: #55c57a;
+					$color-primary-light:#7ed56f;
+					$color-primary-dark: #28b485;
+					$color-test:red;
+					$color-grey-dark:#777;
+					$color-white:#fff;
+					$color-black:#000;
+		*/
+/*  		!!!"base/base"
+
+					*,
+					*::before,
+					*::after{
+						margin: 0;
+						padding: 0;
+						box-sizing: inherit;
+					}
+
+					html{
+						font-size: 62.5%; /*is actualy 62.5% from default font size(16px) which result to 10 px
+					}
+
+					body{
+						font-family: "Lato", sans-serif;
+						font-weight: 400;
+						/*font-size: 16px;
+						line-height: 1.7;
+						color: $color-grey-dark;
+						padding: 3rem;
+						box-sizing: border-box;
+					}
+*/
+/*					!!layout/header"
+
+
+				.header{
+					height: 95vh;
+					background-image: 
+						linear-gradient(
+							to right bottom,rgba($color-primary-light, 0.8),rgba($color-primary-dark, 0.8))
+							 ,url(../img/hero.jpg);
+					background-size: cover;
+					background-position: top;
+					clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%); /* https://bennettfeely.com 
+					position: relative;
+
+					&__logo-box{
+						position: absolute;
+						top: 4rem;
+						left: 4rem;
+					}
+
+					&__logo{
+						height: 3.5rem;
+					}
+
+					&__text-box{
+						position: absolute;
+						top: 40%;
+						left: 50%;
+						transform: translate(-50%,-50%);
+						text-align: center;
+					}
+
+				}
+
+*/
+/*						!!!base/typography"
+
+				.heading-primary{
+					color: $color-white;
+					text-transform: uppercase;
+					backface-visibility: hidden;
+					margin-bottom: 5rem;
+
+					&--main{
+						display: block;
+						font-size: 6rem;
+						letter-spacing: 3.5rem;
+						animation-name: moveFromLeft;
+						animation-duration: 1.3s;
+						animation-timing-function: ease-out;
+					}
+
+					&--sub{
+						display: block;
+						font-size: 2rem;
+						font-weight: 700;
+						letter-spacing: 1.75rem;
+						animation: moveFromRight 1.3s ease-out;
+					}
+				}
+
+*/
+/*							!!!"base/animation
+
+
+						@keyframes moveFromLeft{
+							0% {
+								opacity: 0;
+								transform: translateX(-10rem);
+							}
+
+							80% {
+								transform: translate(2rem);
+							}
+
+							100% {
+								opacity: 1;
+								transform: translate(0);
+							}
+						}
+
+						@keyframes moveFromRight{
+							0% {
+								opacity: 0;
+								transform: translateX(10rem);
+							}
+
+							80% {
+								transform: translate(-2rem);
+							}
+
+							100% {
+								opacity: 1;
+								transform: translate(0);
+							}
+						}
+
+						@keyframes moveFromBottom{
+							0% {
+								opacity: 0;
+								transform: translateY(3rem);
+							}
+
+							100% {
+								opacity: 1;
+								transform: translate(0);
+							}
+						}
+
+*/
+/*							!!!!components/button"
+
+
+
+						.btn{
+							&:link,
+							&:visited{
+								text-transform: uppercase;
+								text-decoration: none;
+								padding: 1.5rem 4rem;
+								display: inline-block;
+								border-radius: 10rem;
+								transition: all .75s;
+								position: relative;
+								font-size: 1.6rem;
+							}
+
+
+							&:hover{
+								transform: translateY(-.3rem);
+								box-shadow: 0 1.5rem 1.5rem rgba($color-black,.35);
+
+								&::after{
+									transform: scaleX(1.4) scaleY(1.6);
+									opacity: 0;
+								}
+
+							}
+
+							&:active{
+								transform: translateY(-.1rem);
+								box-shadow: 0 .5rem 1rem rgba($color-black,.25);
+							}
+
+							&--white{
+								background-color: $color-white;
+								color: $color-grey-dark;
+
+								&::after{
+									background-color: $color-white;
+							}
+							}
+
+							/* pseudo element -> a virtual element put after element 
+							&::after{
+								content: "";
+								display: inline-block;
+								height: 100%;
+								width: 100%;
+								border-radius: 10rem;
+								position: absolute;
+								top: 0;
+								left: 0;
+								z-index: -1;
+								transition: all .75s;
+							}
+
+
+
+
+							&--animated{
+								animation: moveFromBottom .5s ease-out 1.4s;
+								animation-fill-mode: backwards; /* first apply animation 
+							}
+						}
+
+						*/

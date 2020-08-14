@@ -1,0 +1,281 @@
+/*
+COLORS:
+
+Light green: #7ed56f
+Medium green: #55c57a
+Dark green: #28b485
+
+box-sizing: border-box -> no extra margin or padding for element
+vh -> viewport height
+to split text header use display:block -> it takes the entire width
+
+!!! relative units
+percentage - for fonts the reference is the parent element
+            - for length(padding..) the reference is parentWIDTH
+em         -for fonts the reference is the PARENT FONT SIZE element
+            -for length the reference is the FONT SIZE of CURRENT element
+
+rem        - for both -font size and length the reference is the FONT SIZE of ROOT  element
+
+
+*/
+
+
+
+/* apply 7 to 1 architecture model-> all the scss files merged into main scss file 
+ files with _ are partials and we import to main.scss*/
+
+@import "abstracts/functions";
+@import "abstracts/mixins";
+@import "abstracts/variables";
+
+@import "base/base";
+@import "base/animation";
+@import "base/utilities";
+@import "base/typography"; 
+
+@import "components/button";
+@import "components/composition";
+@import "components/feature-box";
+@import "components/card";
+@import "components/story";
+@import "components/bg-video";
+
+@import "layout/header";
+@import "layout/grid";
+
+@import "pages/home";
+
+
+
+	/* !! "abstracts/variables"
+
+					$color-primary: #55c57a;
+					$color-primary-light:#7ed56f;
+					$color-primary-dark: #28b485;
+					$color-test:red;
+					$color-grey-dark:#777;
+					$color-white:#fff;
+					$color-black:#000;
+		*/
+
+
+
+
+
+/*  		!!!"base/base"
+
+					*,
+					*::before,
+					*::after{
+						margin: 0;
+						padding: 0;
+						box-sizing: inherit;
+					}
+
+					html{
+						font-size: 62.5%; /*is actualy 62.5% from default font size(16px) which result to 10 px
+					}
+
+					body{
+						font-family: "Lato", sans-serif;
+						font-weight: 400;
+						/*font-size: 16px;
+						line-height: 1.7;
+						color: $color-grey-dark;
+						padding: 3rem;
+						box-sizing: border-box;
+					}
+*/
+
+
+
+
+/*					!!layout/header"
+
+
+				.header{
+					height: 95vh;
+					background-image: 
+						linear-gradient(
+							to right bottom,rgba($color-primary-light, 0.8),rgba($color-primary-dark, 0.8))
+							 ,url(../img/hero.jpg);
+					background-size: cover;
+					background-position: top;
+					clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%); /* https://bennettfeely.com 
+					position: relative;
+
+					&__logo-box{
+						position: absolute;
+						top: 4rem;
+						left: 4rem;
+					}
+
+					&__logo{
+						height: 3.5rem;
+					}
+
+					&__text-box{
+						position: absolute;
+						top: 40%;
+						left: 50%;
+						transform: translate(-50%,-50%);
+						text-align: center;
+					}
+
+				}
+
+*/
+
+
+
+
+/*						!!!base/typography"
+
+				.heading-primary{
+					color: $color-white;
+					text-transform: uppercase;
+					backface-visibility: hidden;
+					margin-bottom: 5rem;
+
+					&--main{
+						display: block;
+						font-size: 6rem;
+						letter-spacing: 3.5rem;
+						animation-name: moveFromLeft;
+						animation-duration: 1.3s;
+						animation-timing-function: ease-out;
+					}
+
+					&--sub{
+						display: block;
+						font-size: 2rem;
+						font-weight: 700;
+						letter-spacing: 1.75rem;
+						animation: moveFromRight 1.3s ease-out;
+					}
+				}
+
+*/
+
+
+
+/*							!!!"base/animation
+
+
+						@keyframes moveFromLeft{
+							0% {
+								opacity: 0;
+								transform: translateX(-10rem);
+							}
+
+							80% {
+								transform: translate(2rem);
+							}
+
+							100% {
+								opacity: 1;
+								transform: translate(0);
+							}
+						}
+
+						@keyframes moveFromRight{
+							0% {
+								opacity: 0;
+								transform: translateX(10rem);
+							}
+
+							80% {
+								transform: translate(-2rem);
+							}
+
+							100% {
+								opacity: 1;
+								transform: translate(0);
+							}
+						}
+
+						@keyframes moveFromBottom{
+							0% {
+								opacity: 0;
+								transform: translateY(3rem);
+							}
+
+							100% {
+								opacity: 1;
+								transform: translate(0);
+							}
+						}
+
+*/
+
+
+
+
+/*							!!!!components/button"
+
+
+
+						.btn{
+							&:link,
+							&:visited{
+								text-transform: uppercase;
+								text-decoration: none;
+								padding: 1.5rem 4rem;
+								display: inline-block;
+								border-radius: 10rem;
+								transition: all .75s;
+								position: relative;
+								font-size: 1.6rem;
+							}
+
+
+							&:hover{
+								transform: translateY(-.3rem);
+								box-shadow: 0 1.5rem 1.5rem rgba($color-black,.35);
+
+								&::after{
+									transform: scaleX(1.4) scaleY(1.6);
+									opacity: 0;
+								}
+
+							}
+
+							&:active{
+								transform: translateY(-.1rem);
+								box-shadow: 0 .5rem 1rem rgba($color-black,.25);
+							}
+
+							&--white{
+								background-color: $color-white;
+								color: $color-grey-dark;
+
+								&::after{
+									background-color: $color-white;
+							}
+							}
+
+							/* pseudo element -> a virtual element put after element 
+							&::after{
+								content: "";
+								display: inline-block;
+								height: 100%;
+								width: 100%;
+								border-radius: 10rem;
+								position: absolute;
+								top: 0;
+								left: 0;
+								z-index: -1;
+								transition: all .75s;
+							}
+
+
+
+
+							&--animated{
+								animation: moveFromBottom .5s ease-out 1.4s;
+								animation-fill-mode: backwards; /* first apply animation 
+							}
+						}
+
+						*/
